@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HAPPY BIRTHDAY LUKS</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--sky:#dff1ff;--sky2:#b9defc;--blue:#4aa3f0;--deep:#2a6fb5;--ink:#26496e;--white:#fff}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Quicksand',sans-serif;color:var(--ink);background:linear-gradient(180deg,#bfe3ff 0%,var(--sky) 55%,#f4fbff 100%);min-height:100vh;overflow-x:hidden}
+.cloud{position:fixed;background:#fff;border-radius:50px;opacity:.75;z-index:0;animation:drift linear infinite}
+.cloud::before,.cloud::after{content:"";position:absolute;background:#fff;border-radius:50%}
+.cloud::before{width:50%;height:160%;left:15%;top:-60%}.cloud::after{width:38%;height:130%;left:50%;top:-40%}
+@keyframes drift{from{transform:translateX(-30vw)}to{transform:translateX(130vw)}}
+section{position:relative;z-index:1;min-height:100vh;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px 20px}
+section.active{display:flex;animation:in .9s ease}
+@keyframes in{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+h1,h2{font-family:'Playfair Display',serif;color:var(--deep)}
+h1{font-size:clamp(2.4rem,9vw,4.4rem)}h2{font-size:clamp(1.5rem,5vw,2.2rem);margin-bottom:10px}
+.sub{letter-spacing:.18em;font-size:.8rem;text-transform:uppercase;margin:12px 0 28px;color:#5d86ad}
+.btn{background:var(--blue);color:#fff;border:none;border-radius:40px;padding:13px 34px;font:700 1rem 'Quicksand';cursor:pointer;box-shadow:0 6px 18px rgba(74,163,240,.4);transition:.25s}
+.btn:hover{transform:translateY(-2px);background:var(--deep)}
+.btn:focus-visible,.tab:focus-visible,.mc:focus-visible,.box:focus-visible{outline:3px solid var(--deep);outline-offset:3px}
+.btn:disabled{background:#c5d6e6;color:#fff;box-shadow:none;cursor:not-allowed;transform:none}
+.card{background:rgba(255,255,255,.75);border-radius:24px;padding:26px;box-shadow:0 10px 30px rgba(74,163,240,.2);max-width:560px;width:100%}
+#typed{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.15rem,3.8vw,1.6rem);line-height:1.8;min-height:9em}
+#music{position:fixed;top:14px;right:14px;z-index:9;width:44px;height:44px;border-radius:50%;border:none;background:#fff;color:var(--blue);font-size:1.2rem;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.12);display:none}
+/* kue */
+.cake{position:relative;width:220px;margin:60px auto 24px}
+.layer{height:62px;border-radius:12px;background:#fff;border-bottom:8px solid var(--sky2);box-shadow:0 6px 14px rgba(42,111,181,.2)}
+.layer.top{width:78%;margin:0 auto;background:#ffe4ef;border-color:#ffc1d9}
+.candles{position:absolute;top:-52px;left:0;right:0;display:flex;justify-content:center;gap:26px}
+.candle{width:10px;height:42px;background:linear-gradient(#8fd0ff,#4aa3f0);border-radius:3px;position:relative}
+.flame{position:absolute;top:-22px;left:-3px;width:16px;height:22px;background:radial-gradient(#fff6b0,#ffb020);border-radius:50% 50% 50% 50%/65% 65% 35% 35%;animation:fl .35s infinite alternate;transition:.5s}
+@keyframes fl{to{transform:scale(1.12,.92) rotate(3deg)}}
+.out .flame{opacity:0;transform:scale(0)}
+.out .candle::after{content:"";position:absolute;top:-30px;left:3px;width:4px;height:26px;background:rgba(120,140,160,.35);border-radius:4px;animation:smoke 1.8s forwards}
+@keyframes smoke{to{transform:translateY(-34px);opacity:0}}
+/* games */
+.tabs{display:flex;gap:10px;margin-bottom:16px;justify-content:center;flex-wrap:wrap}
+.tab{padding:9px 20px;border-radius:30px;border:2px solid var(--blue);background:#fff;color:var(--blue);font:700 .9rem 'Quicksand';cursor:pointer}
+.tab.on{background:var(--blue);color:#fff}
+#arena{position:relative;width:min(92vw,520px);height:330px;background:linear-gradient(#e9f6ff,#cfeaff);border-radius:22px;overflow:hidden;box-shadow:inset 0 0 0 3px #fff;touch-action:manipulation}
+.bal{position:absolute;bottom:-70px;width:46px;height:58px;border-radius:50% 50% 50% 50%/55% 55% 45% 45%;cursor:pointer;user-select:none}
+.bal::after{content:"";position:absolute;left:50%;top:100%;width:2px;height:16px;background:#7fa6c8}
+.hud{display:flex;gap:18px;justify-content:center;font-weight:700;margin-bottom:10px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;width:min(92vw,400px);margin:0 auto}
+.mc{aspect-ratio:1;border-radius:16px;background:var(--blue);color:#fff;font-size:1.9rem;display:flex;align-items:center;justify-content:center;cursor:pointer;user-select:none;transition:.3s;box-shadow:0 4px 10px rgba(42,111,181,.25)}
+.mc.up{background:#fff}.mc.done{background:#c8f0d8}
+.msg{min-height:1.4em;margin-top:12px;font-weight:700;color:var(--deep)}
+/* gembok / kunci kotak */
+.gate{margin-top:22px;display:flex;flex-direction:column;align-items:center;gap:8px}
+.gate small{font-weight:600;color:#5d86ad;max-width:300px;line-height:1.5}
+.gate.open small{color:var(--deep)}
+.shake{animation:shake .6s}
+@keyframes shake{20%{transform:rotate(-4deg)}40%{transform:rotate(4deg)}60%{transform:rotate(-3deg)}80%{transform:rotate(3deg)}}
+/* kotak kenangan */
+.box{position:relative;width:190px;height:170px;margin:40px auto 28px;cursor:pointer;background:none;border:none;display:block}
+.box .body{position:absolute;bottom:0;left:8px;right:8px;height:110px;background:var(--blue);border-radius:6px 6px 14px 14px;box-shadow:0 14px 28px rgba(42,111,181,.3)}
+.box .body::after{content:"";position:absolute;left:50%;top:0;bottom:0;width:26px;margin-left:-13px;background:#fff}
+.box .lid{position:absolute;bottom:100px;left:0;right:0;height:46px;background:var(--deep);border-radius:10px;transform-origin:left bottom;transition:transform .8s cubic-bezier(.3,1.4,.5,1)}
+.box .lid::after{content:"";position:absolute;left:50%;top:0;bottom:0;width:26px;margin-left:-13px;background:#fff}
+.box .lid::before{content:"";position:absolute;left:50%;top:-26px;width:46px;height:30px;margin-left:-23px;border:6px solid #fff;border-radius:50% 50% 0 0;border-bottom:none}
+.box.idle{animation:bob 2s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-8px)}}
+.box.opened .lid{transform:rotate(-70deg) translateY(-6px)}
+.box.opened{animation:none}
+#boxwrap.gone{display:none}
+/* foto */
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;max-width:860px;width:100%;margin:22px 0}
+.gallery figure{background:#fff;padding:8px 8px 12px;border-radius:12px;box-shadow:0 8px 20px rgba(42,111,181,.22);opacity:0;transform:translateY(24px) rotate(var(--r));transition:.9s}
+.gallery figure.show{opacity:1;transform:rotate(var(--r))}
+.gallery img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:6px;background:var(--sky2)}
+.gallery figcaption{font-size:.8rem;margin-top:8px}
+.closing{font-family:'Playfair Display',serif;font-style:italic;font-size:1.25rem;max-width:560px;line-height:1.7;opacity:0;transition:2s}
+.closing.show{opacity:1}
+canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:8}
+@media (prefers-reduced-motion:reduce){.cloud,.box.idle,.flame{animation:none}}
+</style>
+</head>
+<body>
+<button id="music" title="Putar / jeda musik" aria-label="Putar atau jeda musik">♪</button>
+<audio id="audio" src="lagu.mp3" loop></audio>
+<canvas id="fx"></canvas>
+
+<section id="s1" class="active">
+  <p class="sub">Kejutan kecil untuk</p>
+  <h1 id="lyfa bangsawan"></h1>
+  <p class="sub">Selamat ulang tahun</p>
+  <button class="btn" id="start">Buka kejutannya</button>
+</section>
+
+<section id="s2">
+  <div class="card"><p id="typed"></p></div>
+  <button class="btn" id="n2" style="display:none;margin-top:24px">Lanjut</button>
+</section>
+
+<section id="s3">
+  <h2>Saatnya tiup lilin</h2>
+  <p class="sub" style="margin-bottom:0">Buat permohonan dulu, lalu tekan tombolnya</p>
+  <div class="cake" id="cake">
+    <div class="candles"><div class="candle"><div class="flame"></div></div><div class="candle"><div class="flame"></div></div><div class="candle"><div class="flame"></div></div></div>
+    <div class="layer top"></div><div class="layer"></div>
+  </div>
+  <button class="btn" id="blow">Tiup lilin 🎂</button>
+  <button class="btn" id="n3" style="display:none">Ke mini games</button>
+</section>
+
+<section id="s4">
+  <h2>Mini games</h2>
+  <p class="sub" style="margin:0 0 16px">Selesaikan satu game untuk membuka kotak kenangan</p>
+  <div class="tabs"><button class="tab on" data-g="pop">Pecahkan balon</button><button class="tab" data-g="mem">Cocokkan kartu</button></div>
+  <div id="gpop">
+    <div class="hud"><span>Skor: <b id="score">0</b></span><span>Waktu: <b id="time">20</b></span></div>
+    <div id="arena"></div>
+    <div class="msg" id="popmsg"></div>
+    <button class="btn" id="popgo" style="margin-top:8px">Mulai</button>
+  </div>
+  <div id="gmem" style="display:none">
+    <div class="hud"><span>Langkah: <b id="moves">0</b></span></div>
+    <div class="grid" id="grid"></div>
+    <div class="msg" id="memmsg"></div>
+    <button class="btn" id="memreset" style="display:none;margin-top:8px">Main lagi</button>
+  </div>
+  <div class="gate" id="gate">
+    <button class="btn" id="n4" disabled>🔒 Buka kotak kenangan</button>
+    <small id="gatemsg">Habiskan satu ronde balon sampai waktu habis, atau cocokkan semua kartu.</small>
+  </div>
+</section>
+
+<section id="s5">
+  <div id="boxwrap">
+    <h2>Kotak kenangan</h2>
+    <p class="sub" style="margin-bottom:0">Ketuk kotaknya</p>
+    <button class="box idle" id="box" aria-label="Buka kotak kenangan">
+      <div class="body"></div><div class="lid"></div>
+    </button>
+  </div>
+  <div class="gallery" id="gallery"></div>
+  <p class="closing" id="closing"></p>
+</section>
+
+<script>
+/* ====== EDIT BAGIAN INI ====== */
+const NAMA = "luluks";
+const UCAPAN = "HABEDE luks, semoga panjang umur, sehat selalu, selalu dilimpahkan rezeki";
+const PENUTUP = "Semoga semua harapanmu terbang setinggi balon. Sekali lagi, HABEDE!";
+const FOTO = [
+  {src:"foto1.jpg", cap:"Kenangan 1"},
+  {src:"foto2.jpg", cap:"Kenangan 2"},
+  {src:"foto3.jpg", cap:"Kenangan 3"},
+  {src:"foto4.jpg", cap:"Kenangan 4"}
+];
+const MIN_BALON = 0; // 0 = cukup selesaikan satu ronde. Isi mis. 10 kalau mau harus mencapai skor tertentu.
+/* ============================= */
+const $=id=>document.getElementById(id), audio=$('audio');
+$('nama').textContent=NAMA;
+function go(n){document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));$('s'+n).classList.add('active')}
+
+// awan
+for(let i=0;i<6;i++){const c=document.createElement('div');c.className='cloud';const w=90+Math.random()*90;c.style.cssText=`width:${w}px;height:${w/3}px;top:${Math.random()*70}vh;animation-duration:${60+Math.random()*60}s;animation-delay:-${Math.random()*80}s`;document.body.appendChild(c)}
+
+// konfeti
+const fx=$('fx'),cx=fx.getContext('2d');let parts=[];
+function size(){fx.width=innerWidth;fx.height=innerHeight}size();addEventListener('resize',size);
+function confetti(){for(let i=0;i<140;i++)parts.push({x:innerWidth/2,y:innerHeight/2,vx:(Math.random()-.5)*14,vy:Math.random()*-14-3,s:Math.random()*7+4,c:['#4aa3f0','#8fd0ff','#fff','#ffc1d9','#ffe27a'][i%5],l:140})}
+(function loop(){cx.clearRect(0,0,fx.width,fx.height);parts=parts.filter(p=>p.l-->0);parts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.35;cx.fillStyle=p.c;cx.fillRect(p.x,p.y,p.s,p.s*.6)});requestAnimationFrame(loop)})();
+
+// alur
+$('start').onclick=()=>{audio.volume=.6;audio.play().catch(()=>{});$('music').style.display='block';go(2);let i=0;(function t(){$('typed').textContent=UCAPAN.slice(0,i++);i<=UCAPAN.length?setTimeout(t,40):$('n2').style.display='inline-block'})()};
+$('music').onclick=()=>audio.paused?audio.play():audio.pause();
+$('n2').onclick=()=>go(3);
+$('blow').onclick=()=>{$('cake').classList.add('out');$('blow').style.display='none';setTimeout(()=>{confetti();$('n3').style.display='inline-block'},500)};
+$('n3').onclick=()=>go(4);
+
+// kunci kotak kenangan: baru terbuka setelah satu game selesai
+let unlocked=false;
+function unlock(){
+  if(unlocked)return;unlocked=true;
+  const b=$('n4');b.disabled=false;b.textContent='🎁 Buka kotak kenangan';b.classList.add('shake');
+  $('gate').classList.add('open');$('gatemsg').textContent='Kotaknya sudah terbuka kuncinya!';
+}
+$('n4').onclick=()=>{if(!unlocked)return;go(5)};
+
+// kotak kenangan -> foto
+$('box').onclick=()=>{
+  const bx=$('box');if(bx.classList.contains('opened'))return;
+  bx.classList.remove('idle');bx.classList.add('opened');confetti();
+  setTimeout(()=>{$('boxwrap').classList.add('gone');showPhotos()},1000)
+};
+
+// tab game
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));b.classList.add('on');$('gpop').style.display=b.dataset.g==='pop'?'block':'none';$('gmem').style.display=b.dataset.g==='mem'?'block':'none'});
+
+// game balon
+let score=0,tl=20,run=false,spawn,clock;
+$('popgo').onclick=()=>{if(run)return;run=true;score=0;tl=20;$('score').textContent=0;$('time').textContent=20;$('popmsg').textContent='';$('popgo').style.display='none';
+  const cols=['#ff9ec4','#4aa3f0','#ffd166','#9be3b5','#c9a8ff'];
+  spawn=setInterval(()=>{const b=document.createElement('div');b.className='bal';b.style.left=Math.random()*85+'%';b.style.background=cols[Math.floor(Math.random()*5)];const d=3+Math.random()*2.5;b.style.transition=`transform ${d}s linear`;$('arena').appendChild(b);requestAnimationFrame(()=>b.style.transform='translateY(-420px)');
+    const pop=e=>{e.preventDefault();if(!b.parentNode)return;score++;$('score').textContent=score;b.remove()};b.addEventListener('pointerdown',pop);setTimeout(()=>b.remove(),d*1000+100)},550);
+  clock=setInterval(()=>{$('time').textContent=--tl;if(tl<=0){clearInterval(spawn);clearInterval(clock);run=false;$('arena').innerHTML='';
+    const ok=score>=MIN_BALON;
+    $('popmsg').textContent=ok?`Waktu habis! Kamu memecahkan ${score} balon 🎈`:`Baru ${score} balon, butuh minimal ${MIN_BALON}. Coba lagi ya!`;
+    $('popgo').textContent='Main lagi';$('popgo').style.display='inline-block';
+    if(ok){confetti();unlock()}}},1000)};
+
+// game kartu
+const emo=['🎂','🎈','🎁','⭐','🎶','🌸'];
+let open=[],mv=0,matched=0,lock=false;
+function buildDeck(){
+  const g=$('grid');g.innerHTML='';open=[];mv=0;matched=0;lock=false;
+  $('moves').textContent=0;$('memmsg').textContent='';$('memreset').style.display='none';
+  [...emo,...emo].sort(()=>Math.random()-.5).forEach(e=>{
+    const c=document.createElement('div');c.className='mc';c.dataset.e=e;c.textContent='?';c.tabIndex=0;c.setAttribute('role','button');
+    const flip=()=>{if(lock||c.classList.contains('up')||c.classList.contains('done'))return;c.classList.add('up');c.textContent=e;open.push(c);
+      if(open.length===2){mv++;$('moves').textContent=mv;lock=true;const[a,b]=open;
+        if(a.dataset.e===b.dataset.e){a.classList.replace('up','done');b.classList.replace('up','done');matched++;open=[];lock=false;
+          if(matched===6){$('memmsg').textContent='Hebat, semua cocok! 🎉';$('memreset').style.display='inline-block';confetti();unlock()}}
+        else setTimeout(()=>{[a,b].forEach(x=>{x.classList.remove('up');x.textContent='?'});open=[];lock=false},800)}};
+    c.onclick=flip;c.onkeydown=ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();flip()}};
+    g.appendChild(c)})
+}
+$('memreset').onclick=buildDeck;buildDeck();
+
+// foto
+function showPhotos(){const g=$('gallery');g.innerHTML='';FOTO.forEach((f,i)=>{const fig=document.createElement('figure');fig.style.setProperty('--r',(i%2?2:-2)+'deg');fig.innerHTML=`<img src="${f.src}" alt="${f.cap}"><figcaption>${f.cap}</figcaption>`;g.appendChild(fig);setTimeout(()=>fig.classList.add('show'),300+i*600)});setTimeout(()=>{$('closing').textContent=PENUTUP;$('closing').classList.add('show');confetti()},600+FOTO.length*600)}
+</script>
+</body>
+  </html>
