@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>HAPPY BIRTHDAY LUKS</title>
+<title>Selamat Ulang Tahun</title>
 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
 <style>
 :root{--sky:#dff1ff;--sky2:#b9defc;--blue:#4aa3f0;--deep:#2a6fb5;--ink:#26496e;--white:#fff}
@@ -24,7 +24,7 @@ h1{font-size:clamp(2.4rem,9vw,4.4rem)}h2{font-size:clamp(1.5rem,5vw,2.2rem);marg
 .btn:focus-visible,.tab:focus-visible,.mc:focus-visible,.box:focus-visible{outline:3px solid var(--deep);outline-offset:3px}
 .btn:disabled{background:#c5d6e6;color:#fff;box-shadow:none;cursor:not-allowed;transform:none}
 .card{background:rgba(255,255,255,.75);border-radius:24px;padding:26px;box-shadow:0 10px 30px rgba(74,163,240,.2);max-width:560px;width:100%}
-#typed{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.15rem,3.8vw,1.6rem);line-height:1.8;min-height:9em}
+#typed{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.15rem,3.8vw,1.6rem);line-height:1.8;min-height:5em}
 #music{position:fixed;top:14px;right:14px;z-index:9;width:44px;height:44px;border-radius:50%;border:none;background:#fff;color:var(--blue);font-size:1.2rem;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.12);display:none}
 /* kue */
 .cake{position:relative;width:220px;margin:60px auto 24px}
@@ -86,7 +86,7 @@ canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:8}
 
 <section id="s1" class="active">
   <p class="sub">Kejutan kecil untuk</p>
-  <h1 id="lyfa bangsawan"></h1>
+  <h1 id="nama"></h1>
   <p class="sub">Selamat ulang tahun</p>
   <button class="btn" id="start">Buka kejutannya</button>
 </section>
@@ -143,14 +143,14 @@ canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:8}
 
 <script>
 /* ====== EDIT BAGIAN INI ====== */
-const NAMA = "luluks";
-const UCAPAN = "HABEDE luks, semoga panjang umur, sehat selalu, selalu dilimpahkan rezeki";
-const PENUTUP = "Semoga semua harapanmu terbang setinggi balon. Sekali lagi, HABEDE!";
+const NAMA = "Luluks";
+const UCAPAN = "HABEDE YA LUKS, SEMOGA PANJANG UMUR DAN SEHAT SELALU";
+const PENUTUP = "Semoga semua harapanmu terbang setinggi balon-balon tadi. Sekali lagi, habede ya Luks!";
 const FOTO = [
-  {src:"foto1.jpg", cap:"Kenangan 1"},
-  {src:"foto2.jpg", cap:"Kenangan 2"},
-  {src:"foto3.jpg", cap:"Kenangan 3"},
-  {src:"foto4.jpg", cap:"Kenangan 4"}
+  {src:"foto1.jpg", cap:"Kenangan"},
+  {src:"foto2.jpg", cap:"Kenangan"},
+  {src:"foto3.jpg", cap:"Kenangan"},
+  {src:"foto4.jpg", cap:"Kenangan"}
 ];
 const MIN_BALON = 0; // 0 = cukup selesaikan satu ronde. Isi mis. 10 kalau mau harus mencapai skor tertentu.
 /* ============================= */
@@ -207,17 +207,17 @@ $('popgo').onclick=()=>{if(run)return;run=true;score=0;tl=20;$('score').textCont
 
 // game kartu
 const emo=['🎂','🎈','🎁','⭐','🎶','🌸'];
-let open=[],mv=0,matched=0,lock=false;
+let flipped=[],mv=0,matched=0,busy=false;
 function buildDeck(){
-  const g=$('grid');g.innerHTML='';open=[];mv=0;matched=0;lock=false;
+  const g=$('grid');g.innerHTML='';flipped=[];mv=0;matched=0;busy=false;
   $('moves').textContent=0;$('memmsg').textContent='';$('memreset').style.display='none';
   [...emo,...emo].sort(()=>Math.random()-.5).forEach(e=>{
     const c=document.createElement('div');c.className='mc';c.dataset.e=e;c.textContent='?';c.tabIndex=0;c.setAttribute('role','button');
-    const flip=()=>{if(lock||c.classList.contains('up')||c.classList.contains('done'))return;c.classList.add('up');c.textContent=e;open.push(c);
-      if(open.length===2){mv++;$('moves').textContent=mv;lock=true;const[a,b]=open;
-        if(a.dataset.e===b.dataset.e){a.classList.replace('up','done');b.classList.replace('up','done');matched++;open=[];lock=false;
+    const flip=()=>{if(busy||c.classList.contains('up')||c.classList.contains('done'))return;c.classList.add('up');c.textContent=e;flipped.push(c);
+      if(flipped.length===2){mv++;$('moves').textContent=mv;busy=true;const[a,b]=flipped;
+        if(a.dataset.e===b.dataset.e){a.classList.replace('up','done');b.classList.replace('up','done');matched++;flipped=[];busy=false;
           if(matched===6){$('memmsg').textContent='Hebat, semua cocok! 🎉';$('memreset').style.display='inline-block';confetti();unlock()}}
-        else setTimeout(()=>{[a,b].forEach(x=>{x.classList.remove('up');x.textContent='?'});open=[];lock=false},800)}};
+        else setTimeout(()=>{[a,b].forEach(x=>{x.classList.remove('up');x.textContent='?'});flipped=[];busy=false},800)}};
     c.onclick=flip;c.onkeydown=ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();flip()}};
     g.appendChild(c)})
 }
